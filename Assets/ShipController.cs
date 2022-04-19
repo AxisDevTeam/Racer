@@ -12,6 +12,7 @@ public class ShipController : MonoBehaviour
     [Header("General Settings")]
     public GameObject carModel;
     public GameObject animParent;
+    public ShipBoost boost;
     public TMP_Text speedText;
     public Vector3 debugRayStart;
     public Vector3 debugRayDir;
@@ -27,6 +28,14 @@ public class ShipController : MonoBehaviour
     public float accelerationLerpSpeed;
     public Vector3 extraneousForce;
     public float extraneousForceDecel = 0.05f;
+
+    [Header("Drift Settings")]
+    public bool isDrifting;
+    public float driftTurnSpeed;
+    public float driftTurnAcc;
+    public float driftLateralMoveAmt;
+    public float driftBoostAdd;
+    public float driftBoostAcc;
 
     [Header("Turn Settings")]
     public float turnSpeed = 1f;
@@ -56,6 +65,7 @@ public class ShipController : MonoBehaviour
     [Header("Collision Settings")]
     public float bounceFactor = 0.5f;
     public float bounceSpeedDecrease;
+    public float bounceBoostDecrease;
 
     [Header("Boost Settings")]
     public bool isBoosting;
@@ -68,6 +78,8 @@ public class ShipController : MonoBehaviour
     ChromaticAberration chromaticAberration;
     public float baseCMAmount;
     public float boostCMAmount;
+
+    
     
 
 
@@ -79,6 +91,7 @@ public class ShipController : MonoBehaviour
         volume.TryGet<ChromaticAberration>(out ChromaticAberration cm);
         chromaticAberration = cm;
         baseFOV = Camera.main.fieldOfView;
+        boost = GetComponent<ShipBoost>();
     }
 
     // Update is called once per frame
@@ -107,7 +120,32 @@ public class ShipController : MonoBehaviour
             rigidbody.useGravity = true;
         }
 
-        currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * turnSpeed, turnSpeedAcc);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isDrifting = true;
+        }
+        else
+        {
+            isDrifting = false;
+        }
+
+        float targetTurnSpeed;
+        float targetTurnAcc;
+
+        if (isDrifting)
+        {
+            targetTurnSpeed = driftTurnSpeed;
+            targetTurnAcc = driftTurnAcc;
+            extraneousForce += carModel.transform.right * driftLateralMoveAmt * Input.GetAxisRaw("Horizontal") * rigidbody.velocity.magnitude / moveSpeed;
+            boost.addBoost((Mathf.Abs(currentTurnSpeed)/driftTurnSpeed)*driftBoostAdd);
+        }
+        else
+        {
+            targetTurnSpeed = turnSpeed;
+            targetTurnAcc = turnSpeedAcc;
+        }
+
+        currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * targetTurnSpeed, targetTurnAcc);
 
         carModel.transform.Rotate(0.0f, currentTurnSpeed, 0.0f);
 
@@ -155,11 +193,10 @@ public class ShipController : MonoBehaviour
                 }
             }
         }
+        
+        
 
-
-
-
-        animParent.transform.localRotation = Quaternion.Lerp(animParent.transform.localRotation, Quaternion.Euler(new Vector3(0,0, (currentTurnSpeed/turnSpeed) * rotateTiltFactor)), rotateLerpSpeed);
+        animParent.transform.localRotation = Quaternion.Lerp(animParent.transform.localRotation, Quaternion.Euler(new Vector3(0,0, (currentTurnSpeed/ targetTurnSpeed) * rotateTiltFactor)), rotateLerpSpeed);
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = (rigidbody.velocity.magnitude/moveSpeed)* speedCamShake;
 
         animParent.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time*bobSpeed)*bobAmp,0);
@@ -173,6 +210,20 @@ public class ShipController : MonoBehaviour
         speedText.text = "Speed: " + Mathf.RoundToInt(rigidbody.velocity.magnitude*10) + "km/h";
 
         Debug.DrawRay(debugRayStart, debugRayDir * debugRayLength,Color.red);
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            boost.isBoosting = true;
+            if(boost.canBoost == true)
+            {
+                //currentSpeed = boostSpeed;
+                currentSpeed = Mathf.Lerp(currentSpeed, boostSpeed, driftBoostAcc);
+            }
+        }
+        else
+        {
+            boost.isBoosting = false;
+        }
     }
 
     void Update()
@@ -191,7 +242,12 @@ public class ShipController : MonoBehaviour
         currentSpeed *= bounceSpeedDecrease;
         var calc = (Mathf.Sqrt(collision.impulse.magnitude / moveSpeed)) * bounceFactor;
         //rigidbody.AddForce(calc * collision.contacts[0].normal);
-        extraneousForce = calc * collision.contacts[0].normal;
+        Vector3 pushForce = carModel.transform.InverseTransformVector(calc * collision.contacts[0].normal);
+        pushForce = new Vector3(pushForce.x, 0, pushForce.z);
+        pushForce = carModel.transform.TransformVector(pushForce);
+        extraneousForce = pushForce;
+
+        boost.subtractBoost(bounceBoostDecrease* (collision.impulse.magnitude / moveSpeed));
 
         debugRayDir = collision.contacts[0].normal;
         debugRayLength = calc;
