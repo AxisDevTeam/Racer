@@ -19,7 +19,8 @@ public class ShipBoost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        amountText = GameObject.Find("Boost Value Text").GetComponent<TMP_Text>();
+        amountBar = GameObject.Find("Boost Slider").GetComponent<Slider>();
     }
 
     // Update is called once per frame

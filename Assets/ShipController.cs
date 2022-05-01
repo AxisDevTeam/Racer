@@ -18,6 +18,9 @@ public class ShipController : MonoBehaviour
     public Vector3 debugRayDir;
     public float debugRayLength = 1f;
 
+    public float currentGravForce;
+    public bool useGrav;
+
     [Header("Movement Settings")]
     public float moveSpeed = 0.5f;
     public float currentSpeed;
@@ -92,6 +95,10 @@ public class ShipController : MonoBehaviour
         chromaticAberration = cm;
         baseFOV = Camera.main.fieldOfView;
         boost = GetComponent<ShipBoost>();
+        speedText = GameObject.Find("Speed Text").GetComponent<TMP_Text>();
+        //vcam = GameObject.Find("CM Ship Cam").GetComponent<CinemachineVirtualCamera>();
+        vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
+        vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
     }
 
     // Update is called once per frame
@@ -106,18 +113,21 @@ public class ShipController : MonoBehaviour
         Debug.DrawRay(transform.position - (transform.up * rayOffset), -transform.up * 10, Color.red);
 
 
-        if(Physics.Raycast(gravityCheck, out hit, heightOffset*2))
+        if (Physics.Raycast(gravityCheck, out hit, heightOffset * 2))
         {
             rigidbody.useGravity = false;
+            useGrav = false;
+            currentGravForce = 0;
             Vector3 interpolatedNormal = BarycentricCoordinateInterpolator.GetInterpolatedNormal(hit);
 
-            rigidbody.MoveRotation(Quaternion.Lerp(transform.rotation,Quaternion.FromToRotation(transform.up, interpolatedNormal) * rigidbody.rotation, angleLerpSpeed));
+            rigidbody.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up, interpolatedNormal) * rigidbody.rotation, angleLerpSpeed));
 
-            rigidbody.MovePosition(Vector3.Lerp(transform.position, hit.point + (interpolatedNormal * heightOffset),heightCorrection));
+            rigidbody.MovePosition(Vector3.Lerp(transform.position, hit.point + (interpolatedNormal * heightOffset), heightCorrection));
         }
         else
         {
             rigidbody.useGravity = true;
+            useGrav = true;
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -132,7 +142,7 @@ public class ShipController : MonoBehaviour
         float targetTurnSpeed;
         float targetTurnAcc;
 
-        if (isDrifting)
+        if (isDrifting && useGrav==false)
         {
             targetTurnSpeed = driftTurnSpeed;
             targetTurnAcc = driftTurnAcc;
@@ -144,14 +154,22 @@ public class ShipController : MonoBehaviour
             targetTurnSpeed = turnSpeed;
             targetTurnAcc = turnSpeedAcc;
         }
+        if (useGrav == false)
+        {
+            currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * targetTurnSpeed, targetTurnAcc);
+        }
+        else
+        {
+            currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * targetTurnSpeed / 4, targetTurnAcc);
 
-        currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * targetTurnSpeed, targetTurnAcc);
+        }
 
         carModel.transform.Rotate(0.0f, currentTurnSpeed, 0.0f);
 
-        
 
-        if (rigidbody.useGravity == false) {
+
+        //if (rigidbody.useGravity == false) {
+        if (true){
             //rigidbody.velocity = carModel.transform.forward * Input.GetAxis("Vertical") * moveSpeed;
             float targetFOV = baseFOV;
             if (currentSpeed > moveSpeed)
@@ -181,13 +199,17 @@ public class ShipController : MonoBehaviour
 
             vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, targetFOV, FOVBoostAcc);
 
-            rigidbody.velocity = (carModel.transform.forward * currentSpeed) + extraneousForce;
+            rigidbody.velocity = (carModel.transform.forward * currentSpeed) + extraneousForce - (Vector3.down*currentGravForce);
+            if (useGrav)
+            {
+                currentGravForce -= 9.81f * Time.deltaTime;
+            }
             currentSpeed -= turnDecelSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal"));
             currentSpeed = Mathf.Max(0, currentSpeed);
 
             if (Input.GetKey(KeyCode.S) || Input.GetButton("Cancel"))
             {
-                if (currentSpeed > 0)
+                if (currentSpeed > 0 && useGrav == false)
                 {
                     currentSpeed -= brakeDecelSpeed;
                 }
@@ -199,7 +221,7 @@ public class ShipController : MonoBehaviour
         animParent.transform.localRotation = Quaternion.Lerp(animParent.transform.localRotation, Quaternion.Euler(new Vector3(0,0, (currentTurnSpeed/ targetTurnSpeed) * rotateTiltFactor)), rotateLerpSpeed);
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = (rigidbody.velocity.magnitude/moveSpeed)* speedCamShake;
 
-        animParent.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time*bobSpeed)*bobAmp,0);
+        //animParent.transform.localPosition = new Vector3(0,Mathf.Sin(Time.time*bobSpeed)*bobAmp,0);
 
         
 
@@ -239,7 +261,14 @@ public class ShipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        currentSpeed *= bounceSpeedDecrease;
+        if (useGrav == false)
+        {
+            currentSpeed *= bounceSpeedDecrease;
+        }
+        else
+        {
+            currentSpeed = 0;
+        }
         var calc = (Mathf.Sqrt(collision.impulse.magnitude / moveSpeed)) * bounceFactor;
         //rigidbody.AddForce(calc * collision.contacts[0].normal);
         Vector3 pushForce = carModel.transform.InverseTransformVector(calc * collision.contacts[0].normal);
@@ -247,7 +276,7 @@ public class ShipController : MonoBehaviour
         pushForce = carModel.transform.TransformVector(pushForce);
         extraneousForce = pushForce;
 
-        boost.subtractBoost(bounceBoostDecrease* (collision.impulse.magnitude / moveSpeed));
+            boost.subtractBoost(bounceBoostDecrease * (collision.impulse.magnitude / moveSpeed));
 
         debugRayDir = collision.contacts[0].normal;
         debugRayLength = calc;
@@ -260,6 +289,18 @@ public class ShipController : MonoBehaviour
         if(other.gameObject.tag == boostPadTag)
         {
             currentSpeed = boostSpeed;
+        }
+    }
+
+    public IEnumerator Boost(float seconds)
+    {
+        float timePassed = 0;
+        while (timePassed < seconds)
+        {
+            // Code to go left here
+            timePassed += Time.deltaTime;
+            currentSpeed = boostSpeed;
+            yield return null;
         }
     }
 }
