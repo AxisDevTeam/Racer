@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af668f4f7095ed042872c821a93894b0, type: 3}
-  m_Name: Boost Item
+  m_Name: Steal Boost Item
   m_EditorClassIdentifier: 
-  itemName: Boost
-  desc: Use to boost for 1 second
-  length: 1
-  image: {fileID: 21300000, guid: 8f0d8d5849521ed468c5b445f55dd554, type: 3}
+  itemName: Steal Boost
+  desc: Steal boost from the next racer
+  length: 0
+  image: {fileID: 21300000, guid: 2e42edfe2a51c2848bcf761df50e0553, type: 3}

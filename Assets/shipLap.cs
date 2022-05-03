@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 
-public class shipLap : MonoBehaviour
+public class shipLap : NetworkBehaviour
 {
+    [SyncVar]
     public int currentLap = 0;
+    [SyncVar]
     public int currentCheckpoint = 0;
+
     public float distToNext;
     public bool onLast;
     public PlaceManager pm;
@@ -16,6 +21,7 @@ public class shipLap : MonoBehaviour
 
     public TMP_Text placeText;
     public TMP_Text lapText;
+    public TMP_Text leaderboard;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,7 @@ public class shipLap : MonoBehaviour
         checkpoints = checkpoints.OrderBy(x => x.checkpointIndex).ToList();
         placeText = GameObject.Find("Place Text").GetComponent<TMP_Text>();
         lapText = GameObject.Find("Lap Text").GetComponent<TMP_Text>();
+        leaderboard = GameObject.Find("Leaderboard").GetComponent<TMP_Text>();
     }
 
     void Update()
@@ -46,7 +53,7 @@ public class shipLap : MonoBehaviour
             distToNext = Vector3.Distance(transform.position, checkpoints[0].gameObject.GetComponent<Collider>().ClosestPoint(transform.position));
         }
 
-        if (GetComponent<MultiplayerManager>().IsHost)
+        if (GetComponent<MultiplayerManager>().NetworkObject.IsOwner)
         {
             placeText.text = (pm.players.IndexOf(this) + 1).ToString();
             lapText.text = currentLap.ToString();
@@ -55,6 +62,18 @@ public class shipLap : MonoBehaviour
                 currentLap = 0;
                 currentCheckpoint = 0;
             }
+            string s = "";
+            foreach (var p in pm.players)
+            {
+                s += (pm.players.IndexOf(p) + 1).ToString() + " place | current lap: " + p.currentLap.ToString() + "\n";
+            }
+            leaderboard.text = s;
+        }
+
+        if(Mathf.Round(transform.position.x) ==0 && Mathf.Round(transform.position.z)==0)
+        {
+            currentLap = 0;
+            currentCheckpoint = 0;
         }
 
         
@@ -85,6 +104,9 @@ public class shipLap : MonoBehaviour
                 onLast = false;
             }
 
+            FallManager fm = GetComponent<FallManager>();
+            fm.lastSafePosition = transform.position;
+            fm.lastSafeUpVector = transform.up;
         }
     }
 }

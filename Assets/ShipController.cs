@@ -113,7 +113,7 @@ public class ShipController : MonoBehaviour
         Debug.DrawRay(transform.position - (transform.up * rayOffset), -transform.up * 10, Color.red);
 
 
-        if (Physics.Raycast(gravityCheck, out hit, heightOffset * 2))
+        if (Physics.Raycast(gravityCheck, out hit, heightOffset * 2,-1, QueryTriggerInteraction.Ignore))
         {
             rigidbody.useGravity = false;
             useGrav = false;
@@ -146,7 +146,7 @@ public class ShipController : MonoBehaviour
         {
             targetTurnSpeed = driftTurnSpeed;
             targetTurnAcc = driftTurnAcc;
-            extraneousForce += carModel.transform.right * driftLateralMoveAmt * Input.GetAxisRaw("Horizontal") * rigidbody.velocity.magnitude / moveSpeed;
+            extraneousForce += carModel.transform.right * driftLateralMoveAmt * Input.GetAxisRaw("Horizontal") * Mathf.Pow(rigidbody.velocity.magnitude / moveSpeed,2);
             boost.addBoost((Mathf.Abs(currentTurnSpeed)/driftTurnSpeed)*driftBoostAdd);
         }
         else
@@ -256,6 +256,9 @@ public class ShipController : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             currentSpeed = 0;
             transform.rotation = Quaternion.Euler(Vector3.zero);
+            var fm = GetComponent<FallManager>();
+            fm.lastSafePosition = Vector3.zero;
+            fm.lastSafeUpVector = Vector3.up + Vector3.one;
         }
     }
 

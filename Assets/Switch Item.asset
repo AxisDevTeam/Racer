@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af668f4f7095ed042872c821a93894b0, type: 3}
-  m_Name: Boost Item
+  m_Name: Switch Item
   m_EditorClassIdentifier: 
-  itemName: Boost
-  desc: Use to boost for 1 second
-  length: 1
-  image: {fileID: 21300000, guid: 8f0d8d5849521ed468c5b445f55dd554, type: 3}
+  itemName: Switch
+  desc: Switch places with the person in front of you
+  length: 0
+  image: {fileID: 21300000, guid: c41fe9c1620b61e4e8cd0f94f84ddbee, type: 3}

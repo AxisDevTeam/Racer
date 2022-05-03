@@ -21,7 +21,8 @@ public class PlaceManager : MonoBehaviour
     void Update()
     {
         var p = players;
-        players = players.OrderBy(x => x.currentLap).ThenBy(y => y.currentCheckpoint).ThenByDescending(y => y.distToNext).ToList();
+        players = players.OrderByDescending(x => x.currentLap).ThenByDescending(x => x.currentCheckpoint).ThenBy(x => x.distToNext).ToList();
+        //players = tempPlayers.ToList();
         if (p.SequenceEqual(players)==false)
         {
             print("changed list");
@@ -42,6 +43,20 @@ public class PlaceManager : MonoBehaviour
         players = p;
         */
 
+        //players = GameObject.FindObjectsOfType<shipLap>().ToList<shipLap>().OrderBy(x => x.currentLap).ThenBy(x => x.currentCheckpoint).ThenByDescending(x => x.distToNext).ToList();
         players = GameObject.FindObjectsOfType<shipLap>().ToList<shipLap>();
+    }
+
+    public GameObject findNext(GameObject s)
+    {
+        var i = players.IndexOf(s.GetComponent<shipLap>());
+        if (i == 0)
+        {
+            return players[players.Count - 1].gameObject;
+        }
+        else
+        {
+            return players[i - 1].gameObject;
+        }
     }
 }

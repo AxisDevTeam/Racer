@@ -9,12 +9,19 @@ public class ShipItem : MonoBehaviour
     public Item item;
     ShipController sc;
     public Image display;
+
+    public PlaceManager pm;
+    public MultiplayerManager mm;
     // Start is called before the first frame update
     void Awake()
     {
         sc = GetComponent<ShipController>();
         ih = GameObject.Find("EventSystem []").GetComponent<ItemHandler>();
         display = GameObject.Find("Item Image").GetComponent<Image>();
+
+        pm = GameObject.Find("EventSystem []").GetComponent <PlaceManager>();
+        mm = GetComponent<MultiplayerManager>();
+
     }
 
     // Update is called once per frame
@@ -27,6 +34,25 @@ public class ShipItem : MonoBehaviour
                 if (item.itemName.Equals("Boost"))
                 {
                     StartCoroutine(sc.Boost(item.length));
+                }
+                if (item.itemName.Equals("Enemy Reset"))
+                {
+                    mm.RPCResetPos(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner);
+                }
+                if (item.itemName.Equals("Switch"))
+                {
+                    Vector3 tempPos = transform.position;
+                    Vector3 tempVector = transform.up;
+                    var temp = pm.findNext(gameObject);
+                    transform.position = temp.transform.position;
+                    transform.up = temp.transform.up;
+                    mm.RPCSwitchPos(temp.GetComponent<MultiplayerManager>().Owner,tempPos, tempVector);
+
+                }
+                if (item.itemName.Equals("Steal Boost"))
+                {
+                    GetComponent<ShipBoost>().addBoost(pm.findNext(gameObject).GetComponent<ShipBoost>().boostAmount);
+                    mm.RPCStealBoost(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner);
                 }
                 item = null;
             }
@@ -50,6 +76,8 @@ public class ShipItem : MonoBehaviour
             item = ih.randomItem();
         }
     }
+
+
 
     
 }
