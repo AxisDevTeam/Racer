@@ -34,11 +34,15 @@ public class ShipController : MonoBehaviour
 
     [Header("Drift Settings")]
     public bool isDrifting;
+    public float driftCooldown = 0.5f;
+    public float currentDriftCooldown;
     public float driftTurnSpeed;
     public float driftTurnAcc;
     public float driftLateralMoveAmt;
     public float driftBoostAdd;
     public float driftBoostAcc;
+
+    public float biggestAmount;
 
     [Header("Turn Settings")]
     public float turnSpeed = 1f;
@@ -132,7 +136,14 @@ public class ShipController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            isDrifting = true;
+            if (currentDriftCooldown >= driftCooldown)
+            {
+                isDrifting = true;
+            }
+            else
+            {
+                isDrifting = false;
+            }
         }
         else
         {
@@ -144,16 +155,45 @@ public class ShipController : MonoBehaviour
 
         if (isDrifting && useGrav==false)
         {
+            float amount = Input.GetAxisRaw("Horizontal") * Mathf.Pow(rigidbody.velocity.magnitude / moveSpeed, 2);
+            if(biggestAmount == 0)
+            {
+                biggestAmount = amount;
+            }
+
+            if (biggestAmount > 0)
+            {
+                if (amount > biggestAmount)
+                {
+                    biggestAmount = amount;
+                }
+            }
+
+            if (biggestAmount < 0)
+            {
+                if (amount < biggestAmount)
+                {
+                    biggestAmount = amount;
+                }
+            }
+
             targetTurnSpeed = driftTurnSpeed;
             targetTurnAcc = driftTurnAcc;
-            extraneousForce += carModel.transform.right * driftLateralMoveAmt * Input.GetAxisRaw("Horizontal") * Mathf.Pow(rigidbody.velocity.magnitude / moveSpeed,2);
-            boost.addBoost((Mathf.Abs(currentTurnSpeed)/driftTurnSpeed)*driftBoostAdd);
+            //extraneousForce += carModel.transform.right  * Input.GetAxisRaw("Horizontal") * Mathf.Pow(rigidbody.velocity.magnitude / moveSpeed,2) * driftLateralMoveAmt;
+            extraneousForce += biggestAmount * carModel.transform.right * driftLateralMoveAmt;
+            boost.addBoost((Mathf.Abs(currentTurnSpeed)/driftTurnSpeed)*driftBoostAdd * Mathf.Clamp01(currentSpeed/moveSpeed) * Mathf.Abs(Input.GetAxisRaw("Horizontal")));
         }
         else
         {
             targetTurnSpeed = turnSpeed;
             targetTurnAcc = turnSpeedAcc;
         }
+
+        if (isDrifting == false)
+        {
+            biggestAmount = 0;
+        }
+
         if (useGrav == false)
         {
             currentTurnSpeed = Mathf.Lerp(currentTurnSpeed, Input.GetAxisRaw("Horizontal") * targetTurnSpeed, targetTurnAcc);
@@ -165,6 +205,19 @@ public class ShipController : MonoBehaviour
         }
 
         carModel.transform.Rotate(0.0f, currentTurnSpeed, 0.0f);
+
+        if (isDrifting)
+        {
+            if(biggestAmount > 0)
+            {
+                currentTurnSpeed = Mathf.Max(0, currentTurnSpeed);
+            }
+            
+            if(biggestAmount < 0)
+            {
+                currentTurnSpeed = Mathf.Min(0, currentTurnSpeed);
+            }
+        }
 
 
 
@@ -246,6 +299,11 @@ public class ShipController : MonoBehaviour
         {
             boost.isBoosting = false;
         }
+
+        if (currentDriftCooldown < driftCooldown * 2)
+        {
+            currentDriftCooldown += Time.deltaTime;
+        }
     }
 
     void Update()
@@ -260,6 +318,8 @@ public class ShipController : MonoBehaviour
             fm.lastSafePosition = Vector3.zero;
             fm.lastSafeUpVector = Vector3.up + Vector3.one;
         }
+
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -279,11 +339,15 @@ public class ShipController : MonoBehaviour
         pushForce = carModel.transform.TransformVector(pushForce);
         extraneousForce = pushForce;
 
-            boost.subtractBoost(bounceBoostDecrease * (collision.impulse.magnitude / moveSpeed));
+        boost.subtractBoost(bounceBoostDecrease * (collision.impulse.magnitude / moveSpeed));
+
+        currentDriftCooldown = 0;
 
         debugRayDir = collision.contacts[0].normal;
         debugRayLength = calc;
         debugRayStart = transform.position;
+
+        
 
     }
 

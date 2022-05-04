@@ -219,7 +219,7 @@ MonoBehaviour:
   debugRayLength: 1
   currentGravForce: 0
   useGrav: 0
-  moveSpeed: 90
+  moveSpeed: 95
   currentSpeed: 0
   accelerationSpeed: 0.45
   decelerationSpeed: 0.1
@@ -229,12 +229,15 @@ MonoBehaviour:
   extraneousForce: {x: 0, y: 0, z: 0}
   extraneousForceDecel: 0.05
   isDrifting: 0
-  driftTurnSpeed: 1.6
-  driftTurnAcc: 0.01875
-  driftLateralMoveAmt: -2.25
-  driftBoostAdd: 0.1
-  driftBoostAcc: 0.1
-  turnSpeed: 1.8
+  driftCooldown: 0.5
+  currentDriftCooldown: 0
+  driftTurnSpeed: 2.4
+  driftTurnAcc: 0.075
+  driftLateralMoveAmt: -2.5
+  driftBoostAdd: 0.3
+  driftBoostAcc: 0.05
+  biggestAmount: 0
+  turnSpeed: 1.6
   currentTurnSpeed: 0
   turnSpeedAcc: 0.15
   rotateTiltFactor: -30
@@ -390,6 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d3aedd39e1b81489bbe14d5d211f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 6433869411001875862}
+  _networkObjectCache: {fileID: 6433869411001875862}
   currentLap: 0
   currentCheckpoint: 0
   distToNext: 0
@@ -428,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f786864e4b052c4e94e4e36557b0578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 6433869411001875862}
   _networkObjectCache: {fileID: 6433869411001875862}
   username: 
@@ -461,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6433869411001875862}
   _networkObjectCache: {fileID: 6433869411001875862}
   _synchronizeParent: 0
@@ -503,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _networkBehaviours:
+  - {fileID: 826453180561837679}
   - {fileID: 826453180561837685}
   - {fileID: 7656971487877463209}
   - {fileID: 7918022170118988127}
@@ -4082,7 +4089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 6433869411001875862}
   _networkObjectCache: {fileID: 6433869411001875862}
   _synchronizeParent: 0
