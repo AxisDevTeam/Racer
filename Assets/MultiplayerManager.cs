@@ -11,7 +11,7 @@ public class MultiplayerManager : NetworkBehaviour
     //public PlaceManager pm;
     // Start is called before the first frame update
 
-    [SyncVar]
+    //[SyncVar]
     public string username;
 
     public TMP_Text usernameTXT;
@@ -25,6 +25,7 @@ public class MultiplayerManager : NetworkBehaviour
     {
         usernameTXT = transform.GetChild(0).GetChild(0).Find("Username Parent").GetChild(0).GetComponent<TMP_Text>();
         usernameField = GameObject.Find("Username Field").GetComponent<TMP_InputField>();
+        usernameField.onSubmit.AddListener(_input_OnSubmit);
     }
 
     // Update is called once per frame
@@ -47,6 +48,7 @@ public class MultiplayerManager : NetworkBehaviour
             GetComponent<ShipController>().vcam.LookAt = transform.GetChild(0);
         }
 
+        /*
         if(username.Equals(""))
         {
             username = base.OwnerId.ToString();
@@ -64,6 +66,7 @@ public class MultiplayerManager : NetworkBehaviour
             }
         }
         usernameTXT.text = username;
+        */
     }
 
     [TargetRpc]
@@ -83,5 +86,44 @@ public class MultiplayerManager : NetworkBehaviour
     public void RPCStealBoost(NetworkConnection conn)
     {
         conn.FirstObject.GetComponent<ShipBoost>().boostAmount = 0;
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        SetName();
+        PlayerNameTracker.OnNameChange += PlayerNameTracker_OnNameChange;
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        PlayerNameTracker.OnNameChange -= PlayerNameTracker_OnNameChange;
+    }
+
+    private void PlayerNameTracker_OnNameChange(NetworkConnection arg1, string arg2)
+    {
+        if(arg1 != base.Owner)
+        {
+            return;
+        }
+
+        SetName();
+    }
+
+    private void SetName()
+    {
+        string result = null;
+        if (base.Owner.IsValid)
+            result = PlayerNameTracker.GetPlayerName(base.Owner);
+
+        if (string.IsNullOrEmpty(result))
+            result = base.OwnerId.ToString();
+
+        usernameTXT.text = result;
+    }
+    private void _input_OnSubmit(string text)
+    {
+        PlayerNameTracker.SetName(text);
     }
 }
