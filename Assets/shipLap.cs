@@ -83,6 +83,8 @@ public class shipLap : NetworkBehaviour
     {
         if (other.GetComponent<TrackCheckpoint>())
         {
+
+            
             if (Mathf.Abs(other.GetComponent<TrackCheckpoint>().checkpointIndex-currentCheckpoint)==1)
             {
                 currentCheckpoint = other.GetComponent<TrackCheckpoint>().checkpointIndex;
@@ -107,6 +109,9 @@ public class shipLap : NetworkBehaviour
             FallManager fm = GetComponent<FallManager>();
             fm.lastSafePosition = transform.position;
             fm.lastSafeUpVector = transform.up;
+            
+
+            ShipPlaceTracker.ChangeCheckpoint(this);
         }
     }
 }
