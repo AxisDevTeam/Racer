@@ -12,7 +12,7 @@ using System;
 public class ShipPlaceTracker : NetworkBehaviour
 {
     [SyncObject]
-    private readonly SyncDictionary<NetworkConnection, shipLap> _lapInfo = new SyncDictionary<NetworkConnection, shipLap>();
+    private readonly SyncDictionary<NetworkConnection, shipLapData> _lapInfo = new SyncDictionary<NetworkConnection, shipLapData>();
 
     private static ShipPlaceTracker _instance;
 
@@ -30,8 +30,9 @@ public class ShipPlaceTracker : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ServerSetLapInfo(shipLap lap, NetworkConnection sender = null)
     {
-        _lapInfo[sender] = lap;
-        print(_lapInfo.ToString());
+        shipLapData sld = new shipLapData(lap);
+        _lapInfo[sender] = sld;
+        //print(_lapInfo.ToString());
     }
 
     // Start is called before the first frame update
@@ -43,9 +44,36 @@ public class ShipPlaceTracker : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        foreach(var (key, value) in _lapInfo)
+        {
+            var obj = key.FirstObject;
+            if (!obj.IsOwner)
+            {
+                //print("")
+                var sl = obj.GetComponent<shipLap>();
+                sl.structDataSet(value);
+            }
+            //print(i.Key.FirstObject.GetComponent<shipLap>().distToNext + " | " + i.Value.distToNext);
+        }
+
+        */
+        string p = "";
         foreach(var i in _lapInfo)
         {
-            print(i.Value.distToNext);
+            p += i.Key.ClientId + " | " + i.Value.checkpoint + "\n";
+        }
+        print(p);
+    }
+
+    public struct shipLapData
+    {
+        public int lap;
+        public int checkpoint;
+        public shipLapData(shipLap sl)
+        {
+            lap = sl.currentLap;
+            checkpoint = sl.currentCheckpoint;
         }
     }
 }

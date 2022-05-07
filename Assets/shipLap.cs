@@ -65,7 +65,11 @@ public class shipLap : NetworkBehaviour
             string s = "";
             foreach (var p in pm.players)
             {
-                s += (pm.players.IndexOf(p) + 1).ToString() + " place | current lap: " + p.currentLap.ToString() + "\n";
+                if (p.IsOwner)
+                {
+                    s += "YOU | ";
+                }
+                s += (HelperMethods.addOrdinal(pm.players.IndexOf(p) + 1)) + " place | current lap: " + p.currentLap.ToString() + "\n";
             }
             leaderboard.text = s;
         }
@@ -74,6 +78,7 @@ public class shipLap : NetworkBehaviour
         {
             currentLap = 0;
             currentCheckpoint = 0;
+            //ShipPlaceTracker.ChangeCheckpoint(this);
         }
 
         
@@ -111,7 +116,14 @@ public class shipLap : NetworkBehaviour
             fm.lastSafeUpVector = transform.up;
             
 
-            ShipPlaceTracker.ChangeCheckpoint(this);
+            ShipPlaceTracker.ChangeCheckpoint(GetComponent<shipLap>());
         }
+    }
+
+    public void structDataSet(ShipPlaceTracker.shipLapData sld) 
+    {
+        currentLap = sld.lap;
+        currentCheckpoint = sld.checkpoint;
+        print("info set | id: " + this.OwnerId + ", uname: " + GetComponent<MultiplayerManager>().usernameTXT.text);
     }
 }
