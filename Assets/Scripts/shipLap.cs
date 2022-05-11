@@ -136,6 +136,7 @@ public class shipLap : NetworkBehaviour
     {
         currentLap = sld.l ;
         currentCheckpoint = sld.cp;
+        onLast = sld.oL;
         print("info set | id: " + this.OwnerId + ", uname: " + GetComponent<MultiplayerManager>().usernameTXT.text);
     }
     

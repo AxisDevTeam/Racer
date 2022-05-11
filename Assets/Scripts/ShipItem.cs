@@ -1,9 +1,11 @@
+using FishNet.Connection;
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShipItem : MonoBehaviour
+public class ShipItem : NetworkBehaviour
 {
     public ItemHandler ih;
     public Item item;
@@ -51,8 +53,9 @@ public class ShipItem : MonoBehaviour
                 }
                 if (item.itemName.Equals("Steal Boost"))
                 {
-                    GetComponent<ShipBoost>().addBoost(pm.findNext(gameObject).GetComponent<ShipBoost>().boostAmount);
-                    mm.RPCStealBoost(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner);
+                    GetComponent<ShipBoost>().addBoost(pm.findNext(gameObject).GetComponent<ShipBoost>().syncBoostAmount)   ;
+                    RPCServerStealBoost(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner, GetComponent<MultiplayerManager>().Owner);
+                    print(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner.ClientId);
                 }
                 item = null;
             }
@@ -77,7 +80,36 @@ public class ShipItem : MonoBehaviour
         }
     }
 
+    [ServerRpc]
+    public void RPCServerStealBoost(NetworkConnection conn, NetworkConnection sender)
+    {
+        RPCClientStealBoost(conn, sender.ClientId);
+    }
+    
+    [TargetRpc]
+    public void RPCClientStealBoost(NetworkConnection conn, int sender)
+    {
+        //RpcServerSendBoost(conn, conn.FirstObject.GetComponent<ShipBoost>().boostAmount, sender);
+        print("val1: " + conn.FirstObject.GetComponent<ShipBoost>().syncBoostAmount);
+        //RPCClientSendBoost(NetworkManager.ClientManager.Clients[sender], conn.FirstObject.GetComponent<ShipBoost>().syncBoostAmount);
+        //print("val1: " + conn.FirstObject.GetComponent<ShipBoost>().boostAmount);
+        conn.FirstObject.GetComponent<ShipBoost>().zeroBoost();
+        print(conn.ClientId);
+        print("x");
+    }
 
+    
+    [ServerRpc]
+    public void RPCServerSendBoost(int sender, float amount)
+    {
+        RPCClientSendBoost(NetworkManager.ClientManager.Clients[sender], amount);
+    }
+    
 
+    [TargetRpc]
+    public void RPCClientSendBoost(NetworkConnection conn, float amount)
+    {
+        conn.FirstObject.GetComponent<ShipBoost>().addBoost(amount);
+    }
     
 }

@@ -180,7 +180,7 @@ public class ShipController : MonoBehaviour
             targetTurnSpeed = driftTurnSpeed;
             targetTurnAcc = driftTurnAcc;
             //extraneousForce += carModel.transform.right  * Input.GetAxisRaw("Horizontal") * Mathf.Pow(rigidbody.velocity.magnitude / moveSpeed,2) * driftLateralMoveAmt;
-            extraneousForce += biggestAmount * carModel.transform.right * driftLateralMoveAmt;
+            extraneousForce += biggestAmount * carModel.transform.right * driftLateralMoveAmt * ((Input.GetAxisRaw("Vertical") == 0) ? 0 : 1);
             boost.addBoost((Mathf.Abs(currentTurnSpeed)/driftTurnSpeed)*driftBoostAdd * Mathf.Clamp01(currentSpeed/moveSpeed) * Mathf.Abs(Input.GetAxisRaw("Horizontal")));
         }
         else

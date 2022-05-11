@@ -51,25 +51,7 @@ public class MultiplayerManager : NetworkBehaviour
             usernameTXT.gameObject.GetComponent<FaceCamera>().enabled = false;
         }
 
-        /*
-        if(username.Equals(""))
-        {
-            username = base.OwnerId.ToString();
-        }
 
-        if (usernameField.text.Equals(""))
-        {
-            username = base.OwnerId.ToString();
-        }
-        else
-        {
-            if (username != usernameField.text)
-            {
-                username = usernameField.text;
-            }
-        }
-        usernameTXT.text = username;
-        */
     }
 
     [TargetRpc]
@@ -86,9 +68,10 @@ public class MultiplayerManager : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void RPCStealBoost(NetworkConnection conn)
+    public void RPCDriftSteal(NetworkConnection conn)
     {
-        conn.FirstObject.GetComponent<ShipBoost>().boostAmount = 0;
+        conn.FirstObject.GetComponent<ShipBoost>().subtractBoost(100);
+        print("x");
     }
 
     public override void OnStartClient()

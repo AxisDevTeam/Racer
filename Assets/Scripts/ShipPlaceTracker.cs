@@ -54,10 +54,12 @@ public class ShipPlaceTracker : NetworkBehaviour
     {
         public int l;
         public int cp;
+        public bool oL;
         public shipLapData(shipLap sl)
         {
             l = sl.currentLap;
             cp = sl.currentCheckpoint;
+            oL = sl.onLast;
         }
     }
 }
