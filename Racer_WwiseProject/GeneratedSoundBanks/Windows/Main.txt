@@ -1,0 +1,22 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3288114727	Play_Sound			\Default Work Unit\Play_Sound	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	376383392	ShipSpeed			\Default Work Unit\ShipSpeed	
+
+Effect plug-ins	ID	Name	Type				Notes
+	405289362	Wwise Time Stretch (Custom)	Wwise Time Stretch			
+	501463773	Wwise Stereo Delay (Custom)	Wwise Stereo Delay			
+	571903723	Wwise Tremolo (Custom)	Wwise Tremolo			
+	761045278	Wwise Tremolo (Custom)	Wwise Tremolo			
+	853593321	Wwise Parametric EQ (Custom)	Wwise Parametric EQ			
+	1759944409	Cut_3dB_100Hz	Wwise Parametric EQ			
+
+Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
+	71379293	Wwise Tone Generator	Wwise Tone Generator		\Actor-Mixer Hierarchy\Default Work Unit\Ship Engine\Bass\Wwise Tone Generator	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	316640864	184723__qubodup__plane-loop	C:\Users\naren\UnityProjects\Racer\Racer_WwiseProject\.cache\Windows\SFX\184723__qubodup__plane-loop_FBABBFC7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship Engine\184723__qubodup__plane-loop		1920128
+	458271561	101134__cgeffex__jet-bike	C:\Users\naren\UnityProjects\Racer\Racer_WwiseProject\.cache\Windows\SFX\101134__cgeffex__jet-bike_879BE70F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship Engine\101134__cgeffex__jet-bike		172908
+	983047485	547960__greysound__dryer-exhaust-jet-rx	C:\Users\naren\UnityProjects\Racer\Racer_WwiseProject\.cache\Windows\SFX\547960__greysound__dryer-exhaust-jet-rx_897314B3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship Engine\547960__greysound__dryer-exhaust-jet-rx		8063984
+

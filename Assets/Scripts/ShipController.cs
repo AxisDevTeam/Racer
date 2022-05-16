@@ -21,6 +21,10 @@ public class ShipController : MonoBehaviour
     public float currentGravForce;
     public bool useGrav;
 
+    public float forwardVelocity = 0;
+
+    public MeshRenderer mr;
+
     [Header("Movement Settings")]
     public float moveSpeed = 0.5f;
     public float currentSpeed;
@@ -86,8 +90,8 @@ public class ShipController : MonoBehaviour
     public float baseCMAmount;
     public float boostCMAmount;
 
-    
-    
+    [Header("Sound Settings")]
+    public AK.Wwise.Event moveSound;
 
 
 
@@ -103,6 +107,13 @@ public class ShipController : MonoBehaviour
         //vcam = GameObject.Find("CM Ship Cam").GetComponent<CinemachineVirtualCamera>();
         vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
         vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
+        mr = GetComponent<MeshRenderer>();
+        
+    }
+
+    private void Awake()
+    {
+        mr.materials[4] = new Material(mr.materials[4]);
     }
 
     // Update is called once per frame
@@ -319,6 +330,11 @@ public class ShipController : MonoBehaviour
             fm.lastSafeUpVector = Vector3.up + Vector3.one;
         }
 
+        forwardVelocity = Vector3.Dot(carModel.transform.forward, rigidbody.velocity);
+        AkSoundEngine.SetRTPCValue("ShipSpeed", forwardVelocity);
+        //print("forward velocity: " + forwardVelocity);
+
+        mr.materials[4].SetFloat("_glow", forwardVelocity/boostSpeed);
 
     }
 

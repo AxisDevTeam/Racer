@@ -1,6 +1,575 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{B42DFEFC-BD08-49D7-960E-626ADB526E6C}" SchemaVersion="103">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{B42DFEFC-BD08-49D7-960E-626ADB526E6C}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{B42DFEFC-BD08-49D7-960E-626ADB526E6C}" PersistMode="Standalone">
+			<ChildrenList>
+				<BlendContainer Name="Ship Engine" ID="{D27B6F0E-A085-4C7B-B302-84A880029280}" ShortID="38591503">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9FE911AA-6DC7-4679-AC03-0E6997957E48}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{CB3C46C7-BF7A-4AD3-9F0C-CF03E467C02D}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="101134__cgeffex__jet-bike" ID="{FD93E046-DEF0-4FB1-959B-DA795ECBF824}" ShortID="138832498">
+							<PropertyList>
+								<Property Name="BypassEffect3" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>35</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-590</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{84D2CAA7-0617-4AC9-B89B-60A29BBCC395}" ShortID="980732232">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{10AAA6B6-F286-4FC4-A29E-6A104B636F15}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-4800</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>51.6827</XPos>
+														<YPos>-1634</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>150</XPos>
+														<YPos>700</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>200</XPos>
+														<YPos>1427</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{3F831CD1-BC09-4052-AD9C-3400AA9C13C1}" ShortID="1050384841">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{42267BFF-DAA5-44DF-BF6E-BEDBB4D3F132}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="3"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-200</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>19.23078</XPos>
+														<YPos>-24.50619</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>53.84616</XPos>
+														<YPos>-7.8459</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>200</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9FE911AA-6DC7-4679-AC03-0E6997957E48}"/>
+								</Reference>
+								<Reference Name="Effect0" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
+									<ObjectRef Name="Cut_3dB_100Hz" ID="{67423B74-4F0A-4719-92FE-343347C717C7}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+								</Reference>
+								<Reference Name="Effect1">
+									<Custom>
+										<Effect Name="Wwise Time Stretch (Custom)" ID="{10EE8489-9568-4F11-B5C0-B960B2780A2C}" ShortID="405289362" PluginName="Wwise Time Stretch" CompanyID="0" PluginID="130" PluginType="3">
+											<PropertyList>
+												<Property Name="TimeStretch" Type="Real32" Value="81"/>
+												<Property Name="TimeStretchRandom" Type="Real32" Value="200"/>
+												<Property Name="WindowSize" Type="int32" Value="1024"/>
+											</PropertyList>
+										</Effect>
+									</Custom>
+								</Reference>
+								<Reference Name="Effect2">
+									<Custom>
+										<Effect Name="Wwise Tremolo (Custom)" ID="{DE4E5C13-BA7C-4648-A13B-1D3C2938F9D2}" ShortID="761045278" PluginName="Wwise Tremolo" CompanyID="0" PluginID="131" PluginType="3">
+											<PropertyList>
+												<Property Name="ModDepth" Type="Real32" Value="80.5"/>
+												<Property Name="ModFrequency" Type="Real32" Value="6.48">
+													<RTPCList>
+														<RTPC Name="" ID="{CC88A477-2355-4142-A817-1D034F2FEF13}" ShortID="843182256">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{9DF6D8F1-0673-46A7-B6FB-58745B5B4293}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="5"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>1.86321</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>47.26302</XPos>
+																		<YPos>4.66598</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>150.06676</XPos>
+																		<YPos>12.61797</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>19.10565</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+										</Effect>
+									</Custom>
+								</Reference>
+								<Reference Name="Effect3">
+									<Custom>
+										<Effect Name="Wwise Stereo Delay (Custom)" ID="{3AFFCFD8-1EAD-43FB-8549-7F84D89B2C97}" ShortID="501463773" PluginName="Wwise Stereo Delay" CompanyID="0" PluginID="135" PluginType="3">
+											<PropertyList>
+												<Property Name="DryLevel" Type="Real32" Value="3"/>
+												<Property Name="LeftDelayTime" Type="Real32" Value="0.03"/>
+												<Property Name="RightDelayTime" Type="Real32" Value="0.03"/>
+												<Property Name="RightInputType" Type="int32" Value="3"/>
+												<Property Name="WetLevel" Type="Real32" Value="-6"/>
+											</PropertyList>
+										</Effect>
+									</Custom>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{CB3C46C7-BF7A-4AD3-9F0C-CF03E467C02D}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="101134__cgeffex__jet-bike" ID="{F6D886E6-360B-4262-A4A6-2C2113708349}">
+									<PropertyList>
+										<Property Name="LoopBegin" Type="Real64" Value="21.1839929791365"/>
+										<Property Name="LoopEnd" Type="Real64" Value="21.9134891365935"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="21.0045988451069"/>
+										<Property Name="TrimEnd" Type="Real64" Value="21.9840879104227"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>101134__cgeffex__jet-bike.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="458271561"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="101134__cgeffex__jet-bike" ID="{F6D886E6-360B-4262-A4A6-2C2113708349}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="547960__greysound__dryer-exhaust-jet-rx" ID="{27EA96E7-3C9B-4B6D-BF4F-73CD0126DA9D}" ShortID="404251516">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-1010</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{6F417C0C-C686-447E-BD8F-32EE4DD95315}" ShortID="191413522">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{2EBCCE1A-B4AA-400B-9B9E-309A11418867}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-114</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>200</XPos>
+														<YPos>858</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>5</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{C1AD3F2B-6AC4-46EA-BAEE-93927DAC0DE5}" ShortID="356130038">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{AA855187-9A62-4CFB-B091-D127FE076B9C}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="3"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-26.4444</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>200</XPos>
+														<YPos>-5.61653</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9FE911AA-6DC7-4679-AC03-0E6997957E48}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{CB3C46C7-BF7A-4AD3-9F0C-CF03E467C02D}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="547960__greysound__dryer-exhaust-jet-rx" ID="{010C80A5-C443-4964-B576-1A190756C8AE}">
+									<PropertyList>
+										<Property Name="LoopEnd" Type="Real64" Value="83.1173898667462"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="81.0614826968975"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>547960__greysound__dryer-exhaust-jet-rx.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="983047485"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="547960__greysound__dryer-exhaust-jet-rx" ID="{010C80A5-C443-4964-B576-1A190756C8AE}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="184723__qubodup__plane-loop" ID="{39075006-481F-4045-8295-FF491DFB9B38}" ShortID="363486912">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>35</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-20</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{F7D3F6F5-7A2F-4E2A-8F8E-0D9A3F8875DA}" ShortID="197705346">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{66C20F5B-76DC-415C-8A0D-B0D1922BE71A}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="3"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-11.63715</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>200</XPos>
+														<YPos>-2.36198</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9FE911AA-6DC7-4679-AC03-0E6997957E48}"/>
+								</Reference>
+								<Reference Name="Effect0">
+									<Custom>
+										<Effect Name="Wwise Parametric EQ (Custom)" ID="{9A2509D5-1450-49CF-8E37-839D7016763B}" ShortID="853593321" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
+											<PropertyList>
+												<Property Name="FilterTypeBand2" Type="int32" Value="5"/>
+												<Property Name="FrequencyBand1" Type="Real32" Value="720"/>
+												<Property Name="FrequencyBand2" Type="Real32" Value="2220"/>
+												<Property Name="GainBand1" Type="Real32" Value="13">
+													<RTPCList>
+														<RTPC Name="" ID="{00EB7950-3A00-4918-9A31-99ADED14AE80}" ShortID="209632128">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{7AF0C802-93BF-47F4-8D02-1609F32D82F6}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-24</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>-1.60687</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+												<Property Name="GainBand2" Type="Real32" Value="-4">
+													<RTPCList>
+														<RTPC Name="" ID="{910BCD1F-0FB3-44E4-B0B1-31C64955CC0A}" ShortID="535837553">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{3CCE1C77-3714-4BC6-8BD7-EA3B3F426D06}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-0.01731</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>-11.94541</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+										</Effect>
+									</Custom>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{CB3C46C7-BF7A-4AD3-9F0C-CF03E467C02D}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="184723__qubodup__plane-loop" ID="{A1D0B0DA-7891-4B0C-BD28-9AB8D0F58EA0}">
+									<PropertyList>
+										<Property Name="LoopBegin" Type="Real64" Value="1.00238663484487"/>
+										<Property Name="LoopEnd" Type="Real64" Value="3.62768496420048"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>184723__qubodup__plane-loop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="316640864"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="184723__qubodup__plane-loop" ID="{A1D0B0DA-7891-4B0C-BD28-9AB8D0F58EA0}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Bass" ID="{4D49D09B-4798-427A-BF87-38B42285399B}" ShortID="638307662">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9FE911AA-6DC7-4679-AC03-0E6997957E48}"/>
+								</Reference>
+								<Reference Name="Effect0">
+									<Custom>
+										<Effect Name="Wwise Tremolo (Custom)" ID="{FA8C8492-CC87-4E64-B8B7-39346E208F7F}" ShortID="571903723" PluginName="Wwise Tremolo" CompanyID="0" PluginID="131" PluginType="3">
+											<PropertyList>
+												<Property Name="ModDepth" Type="Real32" Value="85.8"/>
+												<Property Name="ModFrequency" Type="Real32" Value="9.6">
+													<RTPCList>
+														<RTPC Name="" ID="{93BD85DC-D17A-4956-9E93-B6D8ABA0B615}" ShortID="102631924">
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+																</Reference>
+															</ReferenceList>
+															<Curve Name="" ID="{3A1A3AA4-9A58-4C18-B075-45E660A680EF}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="5"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>7.01703</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>17.01254</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</RTPC>
+													</RTPCList>
+												</Property>
+											</PropertyList>
+										</Effect>
+									</Custom>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{CB3C46C7-BF7A-4AD3-9F0C-CF03E467C02D}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SourcePlugin Name="Wwise Sine" ID="{C6C1B837-4D6E-4232-89FF-4B7C8F94DB2B}" ShortID="549713712" PluginName="Wwise Sine" CompanyID="0" PluginID="100">
+									<PropertyList>
+										<Property Name="SineDuration" Type="Real32" Value="1.601"/>
+										<Property Name="SineFrequency" Type="Real32" Value="45"/>
+									</PropertyList>
+									<Language>SFX</Language>
+								</SourcePlugin>
+								<SourcePlugin Name="Wwise Tone Generator" ID="{B3984541-A5C5-4648-A7C8-A81E2FE5318B}" ShortID="71379293" PluginName="Wwise Tone Generator" CompanyID="0" PluginID="102">
+									<PropertyList>
+										<Property Name="StartFreq" Type="Real32" Value="43">
+											<RTPCList>
+												<RTPC Name="" ID="{E24C37B1-D5BC-44BC-81FC-0DAD32ECE0D7}" ShortID="889702780">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{91CFA5DB-4779-4450-8B60-A0719D18A698}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="5"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>53.46581</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>200</XPos>
+																<YPos>72.05286</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
+										<Property Name="WaveGain" Type="Real32" Value="-15.1">
+											<RTPCList>
+												<RTPC Name="" ID="{7A8BA4E1-2B49-4AC7-A6FE-26396C893699}" ShortID="463191178">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="ShipSpeed" ID="{3EF02D2A-A8EF-42EC-9869-527835870DD3}" WorkUnitID="{F39C6F25-2204-47D7-B06C-15ABCF38A95B}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{18E3CA4E-635A-4669-993C-56FDCA1EF23B}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-27.39051</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>200</XPos>
+																<YPos>-8.30566</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
+									</PropertyList>
+									<Language>SFX</Language>
+								</SourcePlugin>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="Wwise Tone Generator" ID="{B3984541-A5C5-4648-A7C8-A81E2FE5318B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<ObjectLists/>
+				</BlendContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

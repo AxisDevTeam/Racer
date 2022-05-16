@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{3DF0B796-2658-43C0-9FA8-0F6FB1809CD7}" SchemaVersion="103">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{3DF0B796-2658-43C0-9FA8-0F6FB1809CD7}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{3DF0B796-2658-43C0-9FA8-0F6FB1809CD7}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Sound" ID="{6B07CEB2-6C27-4FFE-9670-38D5B1040685}">
+					<ChildrenList>
+						<Action Name="" ID="{27C215F3-A4A8-40D2-BC15-3838624D72C4}" ShortID="456827921">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ship Engine" ID="{D27B6F0E-A085-4C7B-B302-84A880029280}" WorkUnitID="{B42DFEFC-BD08-49D7-960E-626ADB526E6C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

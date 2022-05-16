@@ -11,10 +11,36 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="3690994985">
+		<SoundBank Id="1355168291" Language="SFX" Hash="482937718">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="3161908922" Language="SFX" Hash="1316466957">
+			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
+			<ShortName>Main</ShortName>
+			<Path>Main.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3288114727" Name="Play_Sound" ObjectPath="\Events\Default Work Unit\Play_Sound" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="316640864" Language="SFX">
+							<ShortName>184723__qubodup__plane-loop.wav</ShortName>
+							<Path>SFX\184723__qubodup__plane-loop_FBABBFC7.wem</Path>
+						</File>
+						<File Id="458271561" Language="SFX">
+							<ShortName>101134__cgeffex__jet-bike.wav</ShortName>
+							<Path>SFX\101134__cgeffex__jet-bike_879BE70F.wem</Path>
+						</File>
+						<File Id="983047485" Language="SFX">
+							<ShortName>547960__greysound__dryer-exhaust-jet-rx.wav</ShortName>
+							<Path>SFX\547960__greysound__dryer-exhaust-jet-rx_897314B3.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+			<GameParameters>
+				<GameParameter Id="376383392" Name="ShipSpeed" ObjectPath="\Game Parameters\Default Work Unit\ShipSpeed"/>
+			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>

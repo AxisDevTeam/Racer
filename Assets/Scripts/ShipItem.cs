@@ -53,7 +53,7 @@ public class ShipItem : NetworkBehaviour
                 }
                 if (item.itemName.Equals("Steal Boost"))
                 {
-                    GetComponent<ShipBoost>().addBoost(pm.findNext(gameObject).GetComponent<ShipBoost>().syncBoostAmount)   ;
+                    GetComponent<ShipBoost>().addBoost(pm.findNext(gameObject).GetComponent<ShipBoost>().syncBoostAmount);
                     RPCServerStealBoost(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner, GetComponent<MultiplayerManager>().Owner);
                     print(pm.findNext(gameObject).GetComponent<MultiplayerManager>().Owner.ClientId);
                 }

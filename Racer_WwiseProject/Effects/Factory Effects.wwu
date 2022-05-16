@@ -485,10 +485,21 @@
 										</Effect>
 										<Effect Name="Cut_3dB_100Hz" ID="{67423B74-4F0A-4719-92FE-343347C717C7}" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
 											<PropertyList>
-												<Property Name="GainBand1" Type="Real32" Value="-3"/>
+												<Property Name="FilterTypeBand2" Type="int32" Value="3"/>
+												<Property Name="FrequencyBand1" Type="Real32" Value="146"/>
+												<Property Name="FrequencyBand2" Type="Real32" Value="2651"/>
+												<Property Name="GainBand1" Type="Real32" Value="24"/>
+												<Property Name="GainBand2" Type="Real32" Value="2.5"/>
 												<Property Name="OnOffBand2" Type="bool" Value="False"/>
 												<Property Name="OnOffBand3" Type="bool" Value="False"/>
+												<Property Name="OutputLevel" Type="Real32" Value="1"/>
+												<Property Name="QFactorBand2" Type="Real32" Value="0.5"/>
 											</PropertyList>
+											<StateInfo>
+												<StatePropertyList>
+													<Property Name="OutputLevel"/>
+												</StatePropertyList>
+											</StateInfo>
 										</Effect>
 									</ChildrenList>
 								</Folder>

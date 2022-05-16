@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{496C7CCB-E0F5-4DA8-861C-E5D9AB95B252}" SchemaVersion="103">
 	<Effects>
-		<WorkUnit Name="Default Work Unit" ID="{496C7CCB-E0F5-4DA8-861C-E5D9AB95B252}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{496C7CCB-E0F5-4DA8-861C-E5D9AB95B252}" PersistMode="Standalone">
+			<ChildrenList>
+				<Effect Name="New_iZotope_Hybrid_Reverb" ID="{36429623-5B17-48BC-8FDC-C7DFB8E46111}" PluginName="iZotope Hybrid Reverb" CompanyID="259" PluginID="2" PluginType="3">
+					<PropertyList>
+						<Property Name="EarlyGain" Type="Real32" Value="11.7"/>
+					</PropertyList>
+				</Effect>
+			</ChildrenList>
+		</WorkUnit>
 	</Effects>
 </WwiseDocument>

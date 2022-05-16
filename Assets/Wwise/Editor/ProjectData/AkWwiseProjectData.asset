@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: e05505882cc7304fb9177c26ebaf45af
     GuidInternal: 
-    m_lastTime: -8585513740226954631
-    List: []
+    m_lastTime: -8585489246885357999
+    List:
+    - name: Main
+      guid: 92ee9aa98454b8449308866af774fed5
+      id: 3161908922
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: e05505882cc7304fb9177c26ebaf45af
+      - ElementName: Main
+        ObjectType: 7
+        guid: 92ee9aa98454b8449308866af774fed5
+      Path: SoundBanks\Default Work Unit\Main
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 96b7f03d5826c0439fa80f6fb1809cd7
     GuidInternal: 
-    m_lastTime: -8585513740227164073
-    List: []
+    m_lastTime: -8585489265199447399
+    List:
+    - name: Play_Sound
+      guid: b2ce076b276cfe4f967038d5b1040685
+      id: 3288114727
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 96b7f03d5826c0439fa80f6fb1809cd7
+      - ElementName: Play_Sound
+        ObjectType: 3
+        guid: b2ce076b276cfe4f967038d5b1040685
+      Path: Events\Default Work Unit\Play_Sound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -94,8 +125,22 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 256f9cf30422d747b06c15abcf38a95b
     GuidInternal: 
-    m_lastTime: -8585513740225827647
-    List: []
+    m_lastTime: -8585489224372701009
+    List:
+    - name: ShipSpeed
+      guid: 2a2df03eefa8ec429869527835870dd3
+      id: 376383392
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 256f9cf30422d747b06c15abcf38a95b
+      - ElementName: ShipSpeed
+        ObjectType: 13
+        guid: 2a2df03eefa8ec429869527835870dd3
+      Path: Game Parameters\Default Work Unit\ShipSpeed
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -139,7 +184,7 @@ MonoBehaviour:
     m_lastTime: -8585513740224710631
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedWaapiItemIds: 0100000002000000030000000500000006000000080000000a0000000b0000000c0000000e0000001000000011000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
