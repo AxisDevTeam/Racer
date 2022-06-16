@@ -4,6 +4,7 @@
 		<UserProjectSettings Name="" ID="{C8020E02-223A-44C7-BCF3-C197A804FBAB}">
 			<PropertyList>
 				<Property Name="AudioFilesImporter\Path" Type="string" Value="C:\Users\naren\Downloads\"/>
+				<Property Name="Event Action List\{33BB3961-7A8A-486B-A910-DAE8501B3570}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{6B07CEB2-6C27-4FFE-9670-38D5B1040685}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="EventView\FilterMode1" Type="int32" Value="2"/>
 				<Property Name="ExternalSourcesInputPath" Type="string">
@@ -25,7 +26,7 @@
 				<Property Name="GenerateSoundBanks\x64_SelectedPlatforms" Type="string" Value="yzaYx/GtwEKC97JLL3j6KjR/JoYOYbdAttYhB2nllqc="/>
 				<Property Name="GenerateSoundBanks\x64_SelectedSoundBanks" Type="string" Value="ku6aqYRUuESTCIZq93T+1Q=="/>
 				<Property Name="HardwareController\CurrentSession" Type="string" Value="{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}"/>
-				<Property Name="HardwareController\{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}\x64_ActiveGroups" Type="string" Value="laZVjsqM+0+zB5izgYphNgEnTW3/////7AJ1KU/EB0qFJhKTizbFjQEnTW3/////"/>
+				<Property Name="HardwareController\{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}\x64_ActiveGroups" Type="string" Value="laZVjsqM+0+zB5izgYphNgEnDkP/////7AJ1KU/EB0qFJhKTizbFjQEnDkP/////"/>
 				<Property Name="MeterView\LastObject1" Type="string" Value="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 				<Property Name="MeterView\MeterMode1" Type="int32" Value="1"/>
 				<Property Name="MeterView\MeterMode1Viewpoint0" Type="int32" Value="1"/>

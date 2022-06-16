@@ -450,6 +450,10 @@ MonoBehaviour:
   debugRayLength: 1
   currentGravForce: 0
   useGrav: 0
+  forwardVelocity: 0
+  mr: {fileID: 0}
+  soundLerpAmount: 0.075
+  smoothFV: 0
   moveSpeed: 95
   currentSpeed: 0
   accelerationSpeed: 0.45
@@ -494,6 +498,10 @@ MonoBehaviour:
   volume: {fileID: 11400000, guid: 821109119c746ae409ebda1c59856890, type: 2}
   baseCMAmount: 0.1
   boostCMAmount: 1
+  moveSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!96 &5226159029926638452
 TrailRenderer:
   serializedVersion: 2
@@ -761,7 +769,7 @@ MonoBehaviour:
   _isNetworked: 1
   _hasParentNetworkObjectAtEdit: 0
   NetworkObserver: {fileID: 0}
-  _prefabId: 7
+  _prefabId: 8
   _scenePathHash: 0
   _sceneId: 0
   _sceneNetworkObjects:

@@ -1032,11 +1032,11 @@ RectTransform:
   m_Father: {fileID: 1702085171}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 344.7, y: -817.3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 12.099731, y: -7.30011}
   m_SizeDelta: {x: 665.2, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &253722905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13402,10 +13402,10 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 9d1b8128dda18344fbcaf3241337a3f8, type: 2}
   - {fileID: 2100000, guid: 838b8bcfeb914d6439ff1ffc80050878, type: 2}
-  - {fileID: 2100000, guid: d67c76dd73f1853499149260ed5db85f, type: 2}
-  - {fileID: 2100000, guid: a70e2a83016a9f34d9994c2066cfeba1, type: 2}
-  - {fileID: 2100000, guid: 9d2f76ae1748e014a8c996b4ccb3f3da, type: 2}
   - {fileID: 2100000, guid: 48759182400ff8b4ca862f7455f46c05, type: 2}
+  - {fileID: 2100000, guid: a70e2a83016a9f34d9994c2066cfeba1, type: 2}
+  - {fileID: 2100000, guid: d67c76dd73f1853499149260ed5db85f, type: 2}
+  - {fileID: 2100000, guid: 9d2f76ae1748e014a8c996b4ccb3f3da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

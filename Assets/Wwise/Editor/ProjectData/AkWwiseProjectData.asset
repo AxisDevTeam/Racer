@@ -94,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 96b7f03d5826c0439fa80f6fb1809cd7
     GuidInternal: 
-    m_lastTime: -8585489265199447399
+    m_lastTime: -8585488559796403997
     List:
+    - name: Play_Boost
+      guid: 6139bb338a7a6b48a910dae8501b3570
+      id: 3783768423
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 96b7f03d5826c0439fa80f6fb1809cd7
+      - ElementName: Play_Boost
+        ObjectType: 3
+        guid: 6139bb338a7a6b48a910dae8501b3570
+      Path: Events\Default Work Unit\Play_Boost
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Play_Sound
       guid: b2ce076b276cfe4f967038d5b1040685
       id: 3288114727
@@ -125,7 +142,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 256f9cf30422d747b06c15abcf38a95b
     GuidInternal: 
-    m_lastTime: -8585489224372701009
+    m_lastTime: -8585488575917734961
     List:
     - name: ShipSpeed
       guid: 2a2df03eefa8ec429869527835870dd3

@@ -24,6 +24,8 @@ public class ShipController : MonoBehaviour
     public float forwardVelocity = 0;
 
     public MeshRenderer mr;
+    public float soundLerpAmount;
+    public float smoothFV;
 
     [Header("Movement Settings")]
     public float moveSpeed = 0.5f;
@@ -107,12 +109,13 @@ public class ShipController : MonoBehaviour
         //vcam = GameObject.Find("CM Ship Cam").GetComponent<CinemachineVirtualCamera>();
         vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
         vcam = GameObject.FindGameObjectsWithTag("CMShipCam")[0].GetComponent<CinemachineVirtualCamera>();
-        mr = GetComponent<MeshRenderer>();
+        //mr = GetComponent<MeshRenderer>();
         
     }
 
     private void Awake()
     {
+        mr = transform.GetChild(0).GetChild(1).Find("Model").GetChild(0).GetComponent<MeshRenderer>();
         mr.materials[4] = new Material(mr.materials[4]);
     }
 
@@ -331,7 +334,8 @@ public class ShipController : MonoBehaviour
         }
 
         forwardVelocity = Vector3.Dot(carModel.transform.forward, rigidbody.velocity);
-        AkSoundEngine.SetRTPCValue("ShipSpeed", forwardVelocity);
+        smoothFV = Mathf.Lerp(smoothFV, forwardVelocity, soundLerpAmount);
+        AkSoundEngine.SetRTPCValue("ShipSpeed", smoothFV);
         //print("forward velocity: " + forwardVelocity);
 
         mr.materials[4].SetFloat("_glow", forwardVelocity/boostSpeed);
